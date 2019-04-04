@@ -1,0 +1,31 @@
+<mat-nav-list dense>
+  <a mat-list-item routerLink="/" style="height: 0;"></a>
+  <a
+    *ngFor="let item of operations"
+    mat-list-item
+    [routerLink]="[item.route]"
+    routerLinkActive="active"
+    (click)="closeSidebar()"
+  >
+    <mat-icon matListIcon class="app-nav-list-icon">
+      {{ item.icon }}
+    </mat-icon>
+    {{ item.title }}
+  </a>
+
+  <mat-divider></mat-divider>
+
+  <h2 matSubheader>Dashboards</h2>
+
+  <a
+    *ngFor="let item of dashboards"
+    mat-list-item
+    [routerLink]="[item.route]"
+    routerLinkActive="list-item-active"
+  >
+    <mat-icon matListIcon class="app-nav-list-icon">
+      {{ item.icon }}
+    </mat-icon>
+    {{ item.title }}
+  </a>
+</mat-nav-list>

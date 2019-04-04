@@ -1,0 +1,16 @@
+<td-layout sidenavWidth="255px" #layout>
+  <td-navigation-drawer
+    [sidenavTitle]="app.name"
+    color="accent"
+    *ngIf="(app$ | async) as app"
+  >
+    <sxi-side-nav
+      (close)="layout.close()"
+      [operations]="navigation$ | async"
+      [dashboards]="dashboards"
+    ></sxi-side-nav>
+  </td-navigation-drawer>
+
+  <div td-sidenav-content></div>
+  <router-outlet></router-outlet>
+</td-layout>
