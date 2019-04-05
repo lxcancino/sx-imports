@@ -10,6 +10,7 @@ import { CoreModule } from './core/core.module';
 import { environment } from '../environments/environment';
 import { AppStoreModule } from './store/app-store.module';
 import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     // Ngrx Store
     AppStoreModule,
     CoreModule,
+    AuthModule,
     SharedModule
   ],
   providers: [],

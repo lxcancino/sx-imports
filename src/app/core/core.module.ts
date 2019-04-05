@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, APP_INITIALIZER } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,6 +12,12 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { HomePageModule } from './home-page/home-page.module';
 
+import { ConfigService } from './services/config.service';
+
+export function onAppInit(configService: ConfigService): () => Promise<any> {
+  return () => configService.load();
+}
+
 @NgModule({
   declarations: [MainPageComponent, ToolbarComponent, SideNavComponent],
   imports: [
@@ -22,7 +28,16 @@ import { HomePageModule } from './home-page/home-page.module';
     RouterModule,
     HomePageModule
   ],
-  exports: [MainPageComponent]
+  exports: [MainPageComponent],
+  providers: [
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: onAppInit,
+      multi: true,
+      deps: [ConfigService]
+    }
+  ]
 })
 export class CoreModule {
   constructor(
