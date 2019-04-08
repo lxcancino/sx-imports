@@ -64,9 +64,9 @@ export class ApplicationsEffects {
     ),
     tap(action => {
       if (action.payload.loading) {
-        this.loadingService.register();
+        // this.loadingService.register();
       } else {
-        this.loadingService.resolve();
+        // this.loadingService.resolve();
       }
     })
   );

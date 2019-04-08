@@ -10,7 +10,8 @@
       "prefix": "sxi",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "prefix": "sxi"
         },
         "@schematics/angular:class": {
           "skipTests": true
@@ -179,5 +180,14 @@
       }
     }
   },
-  "defaultProject": "sx-imports"
+  "defaultProject": "sx-imports",
+  "cli": {
+    "packageManager": "npm"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss",
+      "prefix": "sxi"
+    }
+  }
 }

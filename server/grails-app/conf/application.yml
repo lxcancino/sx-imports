@@ -178,7 +178,7 @@ environments:
 ---
 server:
   port: 9790
-  contextPath: /siipapx
+  contextPath: /importsx
 ---
 environments:
     certificacion:
