@@ -21,12 +21,6 @@ class Direccion implements GormValidateable, WebDataBinding{
 
     String pais='MEXICO'
 
-    BigDecimal latitud =  0
-
-    BigDecimal longitud = 0
-
-
-
     static constraints = {
         calle(nullable:true,size:1..200)
         numeroInterior(size:1..50,nullable:true)
@@ -36,8 +30,6 @@ class Direccion implements GormValidateable, WebDataBinding{
         codigoPostal(nullable:true)
         estado(nullable:true)
         pais(nullable:true,size:1..100)
-        latitud nullable: true
-        longitud nullable: true
     }
 
     String toLabel(){
