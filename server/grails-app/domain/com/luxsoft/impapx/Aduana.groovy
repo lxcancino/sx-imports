@@ -6,6 +6,7 @@ class Aduana {
 	
 	String nombre
 	Direccion direccion
+
 	static embedded =['direccion']
 
     static constraints = {
@@ -14,6 +15,6 @@ class Aduana {
     }
 	
 	String toString(){
-		return nombre;
+		return nombre
 	}
 }

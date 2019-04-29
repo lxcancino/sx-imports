@@ -2,21 +2,14 @@ package com.luxsoft.impapx.contabilidad
 
 import grails.databinding.BindingFormat
 
-// import org.apache.commons.lang.builder.EqualsBuilder
-// import org.apache.commons.lang.builder.HashCodeBuilder
-import org.springframework.context.ApplicationEvent;
-
-
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import sx.utils.MonedaUtils
 
 
 @EqualsAndHashCode(includes='ejercicio,mes,tipo,folio')
-@ToString(includeNames=true,includePackage=false)
+@ToString(includeNames=true, includePackage=false)
 class Poliza {
-
-	static auditable = true
 
 	Integer ejercicio
 
@@ -151,9 +144,3 @@ class Poliza {
 
 }
 
-class PolizaUpdateEvent extends ApplicationEvent{
-	
-	PolizaUpdateEvent(Poliza poliza){
-		super(poliza)
-	}
-}

@@ -7,6 +7,7 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
         classpath "org.grails.plugins:views-gradle:1.2.9"
+        classpath 'org.grails.plugins:database-migration:3.0.4'
     }
 }
 
@@ -88,6 +89,10 @@ dependencies {
     //Firebase sdk
     implementation 'com.google.firebase:firebase-admin:6.8.0'
 
+    // Database Migration
+    compile 'org.liquibase:liquibase-core:3.5.5'
+    compile 'org.grails.plugins:database-migration:3.0.4'
+
 }
 
 bootRun {
@@ -124,6 +129,14 @@ task buildConf() {
         file.append("JAVA_OPTS=-Xmx2048M")
         file.append("\nRUN_ARGS=\"--JDBC_CONNECTION_STRING=localhost/siipapx_oficinas --server.port=9195\"")
 
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'grails-app/migrations'
+        }
     }
 }
 

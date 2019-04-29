@@ -201,4 +201,9 @@ siipapx:
 quartz:
   autoStartup: false
 ---
+grails:
+  plugin:
+    databasemigration:
+      updateOnStart: true
+      updateOnStartFileName: changelog.groovy
 

@@ -1,26 +1,33 @@
 package com.luxsoft.impapx.tesoreria
 
-import java.util.Date;
 
-import com.luxsoft.impapx.CuentaBancaria;
+import com.luxsoft.impapx.CuentaBancaria
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 class Traspaso {
-	
-	static auditable = true
 
 	Date fecha
+
 	CuentaBancaria cuentaOrigen
+
 	CuentaBancaria cuentaDestino
+
 	Currency moneda
+
 	BigDecimal importe
+
 	BigDecimal comision
+
 	BigDecimal impuesto
+
 	String comentario
 	
 	Date dateCreated
+
 	Date lastUpdated
+
+    Set<MovimientoDeCuenta> movimientos
 	
 	static hasMany = [movimientos:MovimientoDeCuenta]
 
@@ -32,7 +39,8 @@ class Traspaso {
 				return "diferenteMonedaError"
 			
 		}
-		comentario(blank:true)
+
+		comentario blank:true
     }
 	
 	static mapping ={
