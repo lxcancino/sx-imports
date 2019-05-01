@@ -2,7 +2,7 @@
   <td-navigation-drawer
     [sidenavTitle]="app.name"
     color="accent"
-    *ngIf="(app$ | async) as app"
+    *ngIf="app$ | async as app"
   >
     <sxi-side-nav
       (close)="layout.close()"
@@ -10,7 +10,6 @@
       [dashboards]="dashboards"
     ></sxi-side-nav>
   </td-navigation-drawer>
-
-  <div td-sidenav-content></div>
+  <div td-sidenav-content layout="column"></div>
   <router-outlet></router-outlet>
 </td-layout>

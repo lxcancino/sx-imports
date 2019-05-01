@@ -31,6 +31,11 @@ class BootStrap {
                 UserRole.create(admin,userRole,true)
                 UserRole.create(admin,adminRole,true)
             }
+            else {
+                println 'Actualizando password de admin'
+                admin.password = 'admin'
+                admin.save failOnError: true, flush: true
+            }
 
             Role comprasRole=Role.findOrSaveWhere(authority:'ROLE_COMPRAS')
             if(!UserRole.exists(admin.id, comprasRole.id)) {

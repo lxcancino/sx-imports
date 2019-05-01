@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '',
     component: MainPageComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: 'inicio', component: HomePageComponent },
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
