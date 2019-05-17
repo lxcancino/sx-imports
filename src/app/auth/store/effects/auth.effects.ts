@@ -53,6 +53,12 @@ export class AuthEffects {
   );
 
   @Effect()
+  loginSuccess2$ = this.actions$.pipe(
+    ofType<fromActions.LoginSuccess>(AuthActionTypes.LOGIN_SUCCESS),
+    map(() => new fromActions.LoadUserSession())
+  );
+
+  @Effect()
   logoutRoute$ = this.actions$.pipe(
     ofType(ROUTER_NAVIGATION),
     map((action: any) => action.payload.routerState.url),
@@ -70,7 +76,6 @@ export class AuthEffects {
   @Effect()
   loadSession = this.actions$.pipe(
     ofType<fromActions.LoadUserSession>(AuthActionTypes.LoadUserSession),
-    tap(() => console.log('Loading session information.....')),
     mergeMap(() => {
       return this.service.getSessionInfo().pipe(
         map(

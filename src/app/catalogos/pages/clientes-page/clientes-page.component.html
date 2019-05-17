@@ -1,0 +1,9 @@
+<mat-card>
+  <sxi-search-title
+    title="Catálogo de clientes"
+    (search)="grid.filter = $event"
+  >
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-clientes-table [clientes]="clientes$ | async" #grid></sxi-clientes-table>
+</mat-card>

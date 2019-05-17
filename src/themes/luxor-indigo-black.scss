@@ -32,3 +32,13 @@ mat-nav-list {
     background-color: mat-color($primary, 100)
   }
 }
+
+.mat-row  {
+  position: relative;
+  &:hover:not(.active):not(.pasive) {
+    background: mat-color($accent);
+    .mat-cell {
+      color: mat-color($accent, default-contrast);
+    }
+  }
+}

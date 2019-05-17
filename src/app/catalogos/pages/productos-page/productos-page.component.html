@@ -1,3 +1,12 @@
-<p>
-  productos-page works!
-</p>
+<mat-card>
+  <sxi-search-title
+    title="Catálogo de productos"
+    (search)="grid.filter = $event"
+  >
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-productos-table
+    [productos]="productos$ | async"
+    #grid
+  ></sxi-productos-table>
+</mat-card>

@@ -9,6 +9,7 @@ export interface State {
   config: AppConfig;
   globalLoading: boolean;
   mainNavigation?: NavigationRoute[];
+  tenant: 'PAPER' | 'IMPAP';
 }
 
 export const initialState: State = {
@@ -18,7 +19,8 @@ export const initialState: State = {
     longDescription: 'Descripción detallada del proyecto',
     logoUrl: undefined
   },
-  globalLoading: false
+  globalLoading: false,
+  tenant: 'PAPER'
 };
 
 export function reducer(
@@ -47,6 +49,13 @@ export function reducer(
       };
     }
 
+    case ApplicationActionTypes.SetCurrentTenant: {
+      return {
+        ...state,
+        tenant: action.payload.tenant
+      };
+    }
+
     default: {
       return state;
     }
@@ -58,3 +67,5 @@ export const getAppConfig = (state: State) => state.config;
 export const getMainNavigation = (state: State) => state.mainNavigation;
 
 export const getGlobalLoading = (state: State) => state.globalLoading;
+
+export const getTenant = (state: State) => state.tenant;

@@ -1,0 +1,16 @@
+<mat-card>
+  <sxi-search-title
+    title="PEDIMENTOS DE IMPORTACION"
+    (search)="grid.filter = $event"
+  >
+    <button mat-menu-item class="actions" (click)="reload()">
+      <mat-icon>refresh</mat-icon>
+      <span>Refrescar</span>
+    </button>
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-pedimentos-table
+    [pedimentos]="pedimentos$ | async"
+    #grid
+  ></sxi-pedimentos-table>
+</mat-card>

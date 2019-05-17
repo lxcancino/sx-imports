@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import * as fromStore from '@app/store';
+import * as fromAuth from '../../../auth/store';
 
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -17,6 +18,9 @@ export class MainPageComponent implements OnInit {
 
   navigation$: Observable<NavigationRoute[]>;
 
+  expiration$: Observable<any>;
+  apiInfo$: Observable<any>;
+
   dashboards: NavigationRoute[] = [
     {
       icon: 'equalizer',
@@ -30,5 +34,9 @@ export class MainPageComponent implements OnInit {
     this.navigation$ = this.store.pipe(select(fromStore.getMainNavigation));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new fromAuth.LoadUserSession());
+    this.expiration$ = this.store.pipe(select(fromAuth.getSessionExpiration));
+    this.apiInfo$ = this.store.pipe(select(fromAuth.getApiInfo));
+  }
 }

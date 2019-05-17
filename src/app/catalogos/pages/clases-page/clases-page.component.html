@@ -1,0 +1,6 @@
+<mat-card>
+  <sxi-search-title title="Catálogo de clases" (search)="grid.filter = $event">
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-clases-table [clases]="clases$ | async" #grid></sxi-clases-table>
+</mat-card>

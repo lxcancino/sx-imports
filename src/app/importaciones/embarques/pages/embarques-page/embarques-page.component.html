@@ -1,0 +1,12 @@
+<mat-card>
+  <sxi-search-title
+    title="Registro de embarques"
+    (search)="grid.filter = $event"
+  >
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-embarques-table
+    [embarques]="embarques$ | async"
+    #grid
+  ></sxi-embarques-table>
+</mat-card>

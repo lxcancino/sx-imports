@@ -1,0 +1,12 @@
+<mat-card>
+  <sxi-search-title
+    title="Catálogo de proveedores"
+    (search)="grid.filter = $event"
+  >
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-proveedores-table
+    [proveedores]="proveedores$ | async"
+    #grid
+  ></sxi-proveedores-table>
+</mat-card>

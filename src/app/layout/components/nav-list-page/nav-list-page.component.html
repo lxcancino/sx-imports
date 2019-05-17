@@ -20,8 +20,11 @@
     </button>
     <span tdLayoutNavListToggle class="cursor-pointer">{{ title }}</span>
     <div flex>
-      <ng-content select=".toolbar"></ng-content>
+      <div layout layout-align="center">
+        <ng-content select=".toolbar"></ng-content>
+      </div>
     </div>
+    <sxi-main-toolbar flex></sxi-main-toolbar>
   </div>
   <mat-nav-list
     dense
@@ -52,7 +55,14 @@
     <ng-content> </ng-content>
   </router-outlet>
 
-  <td-layout-footer>
+  <!-- <td-layout-footer>
     <h4>Footer pendiente</h4>
+  </td-layout-footer> -->
+  <td-layout-footer>
+    <div layout="row" layout-align="start center">
+      <span class="mat-caption"
+        >Copyright &copy; 2017 Teradata. All rights reserved</span
+      >
+    </div>
   </td-layout-footer>
 </td-layout-nav-list>

@@ -49,6 +49,11 @@ export const getMainNavigation = createSelector(
   fromApplication.getMainNavigation
 );
 
+export const getTenant = createSelector(
+  getApplicationState,
+  fromApplication.getTenant
+);
+
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? []
   : [];

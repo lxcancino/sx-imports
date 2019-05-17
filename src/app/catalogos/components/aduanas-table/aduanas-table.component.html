@@ -1,0 +1,61 @@
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Nombre
+    </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.nombre }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="calle">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Calle
+    </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.direccion.calle }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="colonia">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Colonia
+    </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.direccion.colonia }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="municipio">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Municipio
+    </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.direccion.municipio }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Estdo
+    </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.direccion.estado }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastUpdated">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Modificado
+    </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.lastUpdated | date: 'dd/MM/yyyy HH:mm' }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayColumns"
+    class="cursor-pointer "
+  ></tr>
+</table>

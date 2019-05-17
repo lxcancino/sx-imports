@@ -1,0 +1,87 @@
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="empresa">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Empresa</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.empresa }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="folio">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Folio</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.folio }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+    <td mat-cell *matCellDef="let compra">
+      {{ compra.fecha | date: 'dd/MM/yyyy' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Proveedor</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.nombre }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="moneda">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>M</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.moneda }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipoDeCambio">
+    <th mat-header-cell *matHeaderCellDef>TC</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.tipoDeCambio }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+    <td mat-cell *matCellDef="let compra">
+      {{ compra.total | currency: 'USD' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="comentario">
+    <th mat-header-cell *matHeaderCellDef>Comentario</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.comentario }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="updateUser">
+    <th mat-header-cell *matHeaderCellDef>Usuario</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.updateUser }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastUpdated">
+    <th mat-header-cell *matHeaderCellDef>Modificado</th>
+    <td mat-cell *matCellDef="let compra">{{ compra.lastUpdated }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ultimaDepuracion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>U. Dep</th>
+    <td mat-cell *matCellDef="let compra">
+      {{ compra.ultimaDepuracion | date: 'dd/MM/yyyy' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="operaciones">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let compra">
+      <mat-icon (click)="onEdit($event, compra)" class="pad-right"
+        >edit</mat-icon
+      >
+      <mat-icon (click)="onPrint($event, compra)" class="pad-rigt"
+        >print</mat-icon
+      >
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></tr>
+  <tr
+    mat-row
+    *matRowDef="let compra; columns: displayColumns"
+    class="cursor-pointer "
+    (click)="select.emit(compra)"
+  ></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="[50, 100, 200]"
+  showFirstLastButtons
+></mat-paginator>
