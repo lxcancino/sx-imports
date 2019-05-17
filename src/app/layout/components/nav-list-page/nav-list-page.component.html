@@ -20,8 +20,11 @@
     </button>
     <span tdLayoutNavListToggle class="cursor-pointer">{{ title }}</span>
     <div flex>
-      <ng-content select=".toolbar"></ng-content>
+      <div layout layout-align="center">
+        <ng-content select=".toolbar"></ng-content>
+      </div>
     </div>
+    <sxi-main-toolbar flex></sxi-main-toolbar>
   </div>
   <mat-nav-list
     dense

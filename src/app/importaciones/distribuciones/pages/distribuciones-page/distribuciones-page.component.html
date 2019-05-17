@@ -1,0 +1,12 @@
+<mat-card>
+  <sxi-search-title
+    title="Distribución de embarques"
+    (search)="grid.filter = $event"
+  >
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-distribuciones-table
+    [distribuciones]="distribuciones$ | async"
+    #grid
+  ></sxi-distribuciones-table>
+</mat-card>

@@ -1,0 +1,9 @@
+<mat-card>
+  <sxi-search-title title="Cuentas de gasto" (search)="grid.filter = $event">
+  </sxi-search-title>
+  <mat-divider></mat-divider>
+  <sxi-cuentas-gastos-table
+    [cuentas]="cuentas$ | async"
+    #grid
+  ></sxi-cuentas-gastos-table>
+</mat-card>

@@ -1,0 +1,21 @@
+<div layout layout-align="center center" *ngIf="empresa$ | async as empresa">
+  <span flex></span>
+  <span>
+    <button mat-button [matMenuTriggerFor]="empresaMenu">
+      {{ empresa }}
+    </button>
+    <mat-menu #empresaMenu="matMenu">
+      <button mat-menu-item (click)="cambiarEmpresa(empresa)">
+        <mat-icon>dialpad</mat-icon>
+        <span> {{ empresa === 'IMPAP' ? 'PAPER' : 'IMPAP' }} </span>
+      </button>
+    </mat-menu>
+  </span>
+
+  <span>
+    <button mat-icon-button [matMenuTriggerFor]="toolbarMenu">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #toolbarMenu="matMenu"> </mat-menu>
+  </span>
+</div>

@@ -6,7 +6,8 @@ export enum ApplicationActionTypes {
   SetAppConfig = '[Application AppComponent] Set application config',
   SetMainNavigation = '[Application AppComponent] Set main navigation',
   SetGlobalLoading = '[Application] Set global loading',
-  GlobalHttpError = '[Application] Set global Http error'
+  GlobalHttpError = '[Application] Set global Http error',
+  SetCurrentTenant = '[Application NavBar] Set application current tenant'
 }
 
 export class SetAppConfig implements Action {
@@ -28,8 +29,14 @@ export class GlobalHttpError implements Action {
   constructor(public payload: { response: HttpErrorResponse }) {}
 }
 
+export class SetCurrentTenant implements Action {
+  readonly type = ApplicationActionTypes.SetCurrentTenant;
+  constructor(public payload: { tenant: 'PAPER' | 'IMPAP' }) {}
+}
+
 export type ApplicationActions =
   | SetAppConfig
   | SetMainNavigation
   | SetGlobalLoading
-  | GlobalHttpError;
+  | GlobalHttpError
+  | SetCurrentTenant;

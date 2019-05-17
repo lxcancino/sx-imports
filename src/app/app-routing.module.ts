@@ -16,6 +16,22 @@ const routes: Routes = [
       {
         path: 'catalogos',
         loadChildren: './catalogos/catalogos.module#CatalogosModule'
+      },
+      {
+        path: 'importaciones',
+        loadChildren: './importaciones/importaciones.module#ImportacionesModule'
+      },
+      {
+        path: 'cxp',
+        loadChildren: './cxp/cxp.module#CxpModule'
+      },
+      {
+        path: 'cxc',
+        loadChildren: './cxc/cxc.module#CxcModule'
+      },
+      {
+        path: 'tesoreria',
+        loadChildren: './tesoreria/tesoreria.module#TesoreriaModule'
       }
     ]
   }
