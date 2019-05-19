@@ -20,4 +20,6 @@ export class ComprasPageComponent implements OnInit {
   ngOnInit() {
     this.compras$ = this.store.pipe(select(fromStore.getCompras));
   }
+
+  create() {}
 }
