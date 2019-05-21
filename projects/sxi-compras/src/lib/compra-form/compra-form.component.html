@@ -1,0 +1,54 @@
+<div [formGroup]="form" class="compra-form">
+  <div fxLayout="row">
+    <sxi-proveedor-field fxFlex></sxi-proveedor-field>
+    <mat-form-field class="pad-left">
+      <input
+        matInput
+        [matDatepicker]="fechaPicker"
+        placeholder="Fecha"
+        formControlName="fecha"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="fechaPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #fechaPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="pad-left">
+      <input
+        matInput
+        [matDatepicker]="entregaPicker"
+        placeholder="Entrega"
+        formControlName="entrega"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="entregaPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #entregaPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row">
+    <mat-form-field>
+      <mat-select placeholder="Moneda" formControlName="moneda" class="fill">
+        <mat-option *ngFor="let moneda of monedas" [value]="moneda.clave"
+          >{{ moneda.descripcion }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="pad-left">
+      <input
+        matInput
+        formControlName="tipoDeCambio"
+        placeholder="Tipo de cambio"
+        type="number"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="pad-left" fxFlex>
+      <input matInput formControlName="comentario" placeholder="Comentario" />
+    </mat-form-field>
+  </div>
+</div>

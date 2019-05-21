@@ -11,13 +11,50 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "paths": {
-      "@app": ["src/app"],
-      "@app/*": ["src/app/*"],
-      "sxi-auth": ["dist/sxi-auth"],
-      "sxi-auth/*": ["dist/sxi-auth/*"]
+      "@app": [
+        "src/app"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "sxi-auth": [
+        "dist/sxi-auth"
+      ],
+      "sxi-auth/*": [
+        "dist/sxi-auth/*"
+      ],
+      "sxi-compras": [
+        "dist/sxi-compras"
+      ],
+      "sxi-compras/*": [
+        "dist/sxi-compras/*"
+      ],
+      "sx-domain": [
+        "dist/sx-domain"
+      ],
+      "sx-domain/*": [
+        "dist/sx-domain/*"
+      ],
+      "sxi-common": [
+        "dist/sxi-common"
+      ],
+      "sxi-common/*": [
+        "dist/sxi-common/*"
+      ],
+      "sxi-material": [
+        "dist/sxi-material"
+      ],
+      "sxi-material/*": [
+        "dist/sxi-material/*"
+      ]
     }
   }
 }

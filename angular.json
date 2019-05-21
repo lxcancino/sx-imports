@@ -11,7 +11,8 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "prefix": "sxi"
+          "prefix": "sxi",
+          "changeDetection": "OnPush"
         },
         "@schematics/angular:class": {
           "skipTests": true
@@ -41,7 +42,10 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "src/styles.scss",
               "node_modules/@covalent/core/common/platform.scss"
@@ -101,16 +105,26 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": [],
-            "assets": ["src/favicon.ico", "src/assets"]
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -136,7 +150,154 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sxi-compras": {
+      "root": "projects/sxi-compras",
+      "sourceRoot": "projects/sxi-compras/src",
+      "projectType": "library",
+      "prefix": "sxi-compras",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sxi-compras/tsconfig.lib.json",
+            "project": "projects/sxi-compras/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sxi-compras/src/test.ts",
+            "tsConfig": "projects/sxi-compras/tsconfig.spec.json",
+            "karmaConfig": "projects/sxi-compras/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sxi-compras/tsconfig.lib.json",
+              "projects/sxi-compras/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sx-domain": {
+      "root": "projects/sx-domain",
+      "sourceRoot": "projects/sx-domain/src",
+      "projectType": "library",
+      "prefix": "sxi-domain",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sx-domain/tsconfig.lib.json",
+            "project": "projects/sx-domain/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sx-domain/src/test.ts",
+            "tsConfig": "projects/sx-domain/tsconfig.spec.json",
+            "karmaConfig": "projects/sx-domain/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sx-domain/tsconfig.lib.json",
+              "projects/sx-domain/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sxi-common": {
+      "root": "projects/sxi-common",
+      "sourceRoot": "projects/sxi-common/src",
+      "projectType": "library",
+      "prefix": "sxi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sxi-common/tsconfig.lib.json",
+            "project": "projects/sxi-common/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sxi-common/src/test.ts",
+            "tsConfig": "projects/sxi-common/tsconfig.spec.json",
+            "karmaConfig": "projects/sxi-common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sxi-common/tsconfig.lib.json",
+              "projects/sxi-common/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sxi-material": {
+      "root": "projects/sxi-material",
+      "sourceRoot": "projects/sxi-material/src",
+      "projectType": "library",
+      "prefix": "sxi-material",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sxi-material/tsconfig.lib.json",
+            "project": "projects/sxi-material/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sxi-material/src/test.ts",
+            "tsConfig": "projects/sxi-material/tsconfig.spec.json",
+            "karmaConfig": "projects/sxi-material/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sxi-material/tsconfig.lib.json",
+              "projects/sxi-material/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
