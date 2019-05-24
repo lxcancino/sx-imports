@@ -45,7 +45,6 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
     this.filtered = this.form.get('producto').valueChanges.pipe(
       startWith<string | ProveedorProducto>(''),
       map(value => (typeof value === 'string' ? value : value.clave)),
@@ -54,8 +53,8 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
 
     if (this.compraDet) {
       const cve = this.compraDet.clave;
-      const producto = this.productos.find(item => item.clave === cve)
-      const data = {...this.compraDet, producto};
+      const producto = this.productos.find(item => item.clave === cve);
+      const data = { ...this.compraDet, producto };
       this.form.patchValue(data);
     }
   }
