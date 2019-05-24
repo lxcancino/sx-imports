@@ -1,0 +1,45 @@
+<form [formGroup]="form">
+  <div layout class="compra-form-row">
+    <sxi-proveedor-field formControlName="proveedor" flex></sxi-proveedor-field>
+    <sxi-fecha-field
+      class="pad-left fecha-field"
+      [parent]="form"
+      property="fecha"
+    ></sxi-fecha-field>
+
+    <sxi-fecha-field
+      class="pad-left fecha-field"
+      [parent]="form"
+      [min]="form.value.fecha"
+      property="entrega"
+      placeholder="F.Entrega"
+    ></sxi-fecha-field>
+    <mat-form-field>
+      <input
+        matInput
+        disabled="true"
+        value="{{ compra?.depuracion | date: 'dd/MMM/yyyy' }}"
+        placeholder="Depuración"
+        [value]="compra"
+        class="text-center"
+      />
+    </mat-form-field>
+  </div>
+  <div layout>
+    <sxi-tc-field [parent]="form"></sxi-tc-field>
+    <sxi-upper-case-field
+      class="pad-left"
+      formControlName="comentario"
+      placeholder="Comentario"
+      flex
+    >
+    </sxi-upper-case-field>
+  </div>
+  <div>
+    <sxi-compra-partidas
+      [parent]="form"
+      [partidas]="partidas.value"
+      (edit)="onEdit($event)"
+    ></sxi-compra-partidas>
+  </div>
+</form>

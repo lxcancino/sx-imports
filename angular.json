@@ -11,7 +11,9 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "prefix": "sxi"
+          "prefix": "sxi",
+          "changeDetection": "OnPush",
+          "skipImport": true
         },
         "@schematics/angular:class": {
           "skipTests": true

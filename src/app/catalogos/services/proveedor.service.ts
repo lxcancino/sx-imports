@@ -6,18 +6,14 @@ import { catchError } from 'rxjs/operators';
 
 import { ConfigService } from '@app/core/services/config.service';
 
-import { Proveedor } from '@app/domain/models';
+import { Proveedor, ProveedorProducto } from '@app/domain/models';
 import { Update } from '@ngrx/entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedorService {
-  private apiUrl: string;
-
-  constructor(private http: HttpClient, private config: ConfigService) {
-    this.apiUrl = config.buildApiUrl('proveedores');
-  }
+  constructor(private http: HttpClient, private config: ConfigService) {}
 
   list(): Observable<Proveedor[]> {
     return this.http
@@ -48,5 +44,16 @@ export class ProveedorService {
   delete(id: number): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url).pipe(catchError(error => throwError(error)));
+  }
+
+  productos(id: number): Observable<ProveedorProducto[]> {
+    const url = `${this.apiUrl}/${id}/productos`;
+    return this.http
+      .get<ProveedorProducto[]>(url)
+      .pipe(catchError(error => throwError(error)));
+  }
+
+  get apiUrl() {
+    return this.config.buildApiUrl('proveedores');
   }
 }

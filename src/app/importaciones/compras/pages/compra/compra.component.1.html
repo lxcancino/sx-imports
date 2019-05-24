@@ -1,0 +1,32 @@
+<mat-card>
+  <div class="pad-left pad-right pad-top">
+    <span class="mat-title">{{ title }}</span>
+  </div>
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <sxi-compra-form
+      #form
+      [productos]="productos$ | async"
+      (proveedorChange)="onProveedorChange($event)"
+      (save)="onSave($event)"
+    ></sxi-compra-form>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <ng-template
+      tdLoading
+      [tdLoadingUntil]="!(loading$ | async)"
+      tdLoadingStrategy="overlay"
+    >
+      <button mat-button color="primary" (click)="form.submit()">
+        <mat-icon>save</mat-icon>
+        <span>Salvar</span>
+      </button>
+      <button mat-button color="accent" (click)="form.agregarPartida()">
+        <mat-icon>add</mat-icon>
+        <span>Agregar Partida</span>
+      </button>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>

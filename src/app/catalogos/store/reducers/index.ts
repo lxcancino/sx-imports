@@ -5,8 +5,9 @@ import * as fromClases from './clase.reducer';
 import * as fromMarcas from './marca.reducer';
 import * as fromProductos from './producto.reducer';
 import * as fromClientes from './cliente.reducer';
-import * as fromProveedores from './proveedor.reducer';
 import * as fromAduanas from './aduana.reducer';
+import * as fromProveedores from './proveedor.reducer';
+import * as fromProveedorProductos from './proveedor-producto.reducer';
 
 export interface State {
   lineas: fromLineas.State;
@@ -16,6 +17,7 @@ export interface State {
   clientes: fromClientes.State;
   proveedores: fromProveedores.State;
   aduanas: fromAduanas.State;
+  proveedorProductos: fromProveedorProductos.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -25,7 +27,8 @@ export const reducers: ActionReducerMap<State> = {
   productos: fromProductos.reducer,
   clientes: fromClientes.reducer,
   proveedores: fromProveedores.reducer,
-  aduanas: fromAduanas.reducer
+  aduanas: fromAduanas.reducer,
+  proveedorProductos: fromProveedorProductos.reducer
 };
 
 export const getState = createFeatureSelector<State>('catalogos');

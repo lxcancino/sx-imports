@@ -3,11 +3,11 @@ import { BancoSat } from './sat';
 import { ProveedorProducto } from './proveedor-producto';
 
 export interface Proveedor {
+  id: number;
   nombre: string;
   direccion?: Direccion;
   email?: string;
   www?: string;
-
   factorDeUtilidad: number;
   tipoDeCosteo: 'NORMAL' | 'ESPECIAL';
   rfc: string;

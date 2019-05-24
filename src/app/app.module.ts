@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { AppStoreModule } from './store/app-store.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { CatalogosModule } from './catalogos/catalogos.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,8 @@ import { AuthModule } from './auth/auth.module';
     AppStoreModule,
     CoreModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    CatalogosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

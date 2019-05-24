@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomePageComponent } from './core/home-page/home-page.component';
 import { MainPageComponent } from './core/components/main-page/main-page.component';
 
@@ -13,10 +13,12 @@ const routes: Routes = [
     children: [
       { path: 'inicio', component: HomePageComponent },
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+      /*
       {
         path: 'catalogos',
         loadChildren: './catalogos/catalogos.module#CatalogosModule'
       },
+      */
       {
         path: 'importaciones',
         loadChildren: './importaciones/importaciones.module#ImportacionesModule'
@@ -38,7 +40,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

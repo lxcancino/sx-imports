@@ -16,7 +16,7 @@ import {
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'catalogos',
     component: CatalogosPageComponent,
     children: [
       {

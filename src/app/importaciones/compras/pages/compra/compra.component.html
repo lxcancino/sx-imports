@@ -1,0 +1,55 @@
+<mat-card>
+  <div class="pad-left pad-right pad-top">
+    <span layout *ngIf="compra$ | async as compra; else newCompra">
+      <span class="mat-title">
+        {{ compra.nombre }}
+      </span>
+      <span flex></span>
+      <span class="pad-right">Folio</span>
+      <span>{{ compra.empresa }}:</span>
+      <span flex="10">{{ compra.folio }}</span>
+    </span>
+
+    <ng-template #newCompra>
+      <span class="mat-title">
+        ALTA DE COMPRA
+      </span>
+    </ng-template>
+  </div>
+
+  <mat-card-content>
+    <sxi-compra-form
+      #form
+      [compra]="compra$ | async"
+      [productos]="productos$ | async"
+      (proveedorChange)="onProveedorChange($event)"
+      (save)="onSave($event)"
+      (update)="onUpdate($event)"
+    ></sxi-compra-form>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <ng-template
+      tdLoading
+      [tdLoadingUntil]="!(loading$ | async)"
+      tdLoadingStrategy="overlay"
+    >
+      <a mat-button [routerLink]="['../']">
+        <mat-icon>arrow_back</mat-icon> Compras
+      </a>
+      <button
+        mat-button
+        color="primary"
+        (click)="form.submit()"
+        [disabled]="form.isDisabled()"
+      >
+        <mat-icon>save</mat-icon>
+        <span>Salvar</span>
+      </button>
+      <button mat-button color="accent" (click)="form.agregarPartida()">
+        <mat-icon>add</mat-icon>
+        <span>Agregar Partida</span>
+      </button>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>

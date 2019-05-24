@@ -17,18 +17,24 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(state = initialState, action: CompraActions): State {
   switch (action.type) {
+    case CompraActionTypes.SaveCompraFail:
+    case CompraActionTypes.UpdateCompraFail:
     case CompraActionTypes.LoadCompras: {
       return {
         ...state,
         loading: true
       };
     }
+
+    case CompraActionTypes.SaveCompraFail:
+    case CompraActionTypes.UpdateCompraFail:
     case CompraActionTypes.LoadComprasFail: {
       return {
         ...state,
         loading: false
       };
     }
+
     case CompraActionTypes.LoadComprasSuccess: {
       return adapter.addAll(action.payload.compras, {
         ...state,
@@ -36,6 +42,29 @@ export function reducer(state = initialState, action: CompraActions): State {
         loading: false
       });
     }
+
+    case CompraActionTypes.UpdateCompraSuccess: {
+      const compra = action.payload.compra;
+      return adapter.upsertOne(compra, {
+        ...state,
+        loading: false
+      });
+    }
+
+    case CompraActionTypes.UpsertCompra: {
+      return adapter.upsertOne(action.payload.compra, {
+        ...state
+      });
+    }
+
+    case CompraActionTypes.SaveCompraSuccess: {
+      const compra = action.payload.compra;
+      return adapter.addOne(compra, {
+        ...state,
+        loading: false
+      });
+    }
+
     default:
       return { ...state };
   }

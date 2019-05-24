@@ -13,11 +13,7 @@ import { Update } from '@ngrx/entity';
   providedIn: 'root'
 })
 export class MarcaService {
-  private apiUrl: string;
-
-  constructor(private http: HttpClient, private config: ConfigService) {
-    this.apiUrl = config.buildApiUrl('marcas');
-  }
+  constructor(private http: HttpClient, private config: ConfigService) {}
 
   list(): Observable<Marca[]> {
     return this.http
@@ -48,5 +44,9 @@ export class MarcaService {
   delete(id: number): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url).pipe(catchError(error => throwError(error)));
+  }
+
+  get apiUrl() {
+    return this.config.buildApiUrl('marcas');
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
+import * as fromRoot from '@app/store';
 import * as fromStore from '../../../store';
 
 import { Observable } from 'rxjs';
@@ -19,6 +20,12 @@ export class ComprasPageComponent implements OnInit {
 
   ngOnInit() {
     this.compras$ = this.store.pipe(select(fromStore.getCompras));
+  }
+
+  onEdit(event: Compra) {
+    this.store.dispatch(
+      new fromRoot.Go({ path: ['importaciones/compras', event.id] })
+    );
   }
 
   create() {}

@@ -5,3 +5,4 @@ export * from './producto.actions';
 export * from './cliente.actions';
 export * from './proveedor.actions';
 export * from './aduana.actions';
+export * from './proveedor-producto.action';

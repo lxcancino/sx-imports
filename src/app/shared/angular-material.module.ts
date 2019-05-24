@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -18,8 +16,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { MatNativeDateModule } from '@angular/material';
-// import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {
+  MatNativeDateModule,
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE
+} from '@angular/material';
+import {
+  MomentDateModule,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_FORMATS
+} from '@angular/material-moment-adapter';
 
 //
 // Navigation
@@ -73,9 +80,6 @@ import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
-    // BrowserAnimationsModule,
-    // HttpClientModule,
-
     LayoutModule,
 
     MatAutocompleteModule,
@@ -89,7 +93,7 @@ import { MatTableModule } from '@angular/material/table';
     MatSlideToggleModule,
 
     MatNativeDateModule,
-    // MatMomentDateModule,
+    MomentDateModule,
 
     MatMenuModule,
     MatSidenavModule,
@@ -166,6 +170,11 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule
+  ],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }
   ]
 })
 export class AngularMaterialModule {}

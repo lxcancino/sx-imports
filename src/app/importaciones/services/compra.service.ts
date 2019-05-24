@@ -25,7 +25,7 @@ export class CompraService {
       .pipe(catchError(error => throwError(error)));
   }
 
-  get(id: number): Observable<Compra> {
+  get(id: string): Observable<Compra> {
     const url = `${this.apiUrl}/${id}`;
     return this.http
       .get<Compra>(url)

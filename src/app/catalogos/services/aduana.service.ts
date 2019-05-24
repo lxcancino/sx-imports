@@ -13,11 +13,7 @@ import { Update } from '@ngrx/entity';
   providedIn: 'root'
 })
 export class AduanaService {
-  private apiUrl: string;
-
-  constructor(private http: HttpClient, private config: ConfigService) {
-    this.apiUrl = config.buildApiUrl('aduanas');
-  }
+  constructor(private http: HttpClient, private config: ConfigService) {}
 
   list(): Observable<Aduana[]> {
     return this.http
@@ -48,5 +44,9 @@ export class AduanaService {
   delete(id: number): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url).pipe(catchError(error => throwError(error)));
+  }
+
+  get apiUrl() {
+    return this.config.buildApiUrl('aduanas');
   }
 }
