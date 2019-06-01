@@ -15,6 +15,8 @@ import {
 } from 'rxjs/operators';
 
 import { isObject } from 'lodash/lang';
+import { round } from 'lodash/math';
+
 import { CompraDet } from '@app/domain/models/compras';
 // import { isEmpty } from 'lodash/isEmpty';
 
@@ -28,8 +30,6 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
   compraDet: Partial<CompraDet>;
 
   productos: ProveedorProducto[];
-
-  filtered: Observable<ProveedorProducto[]>;
 
   destroy$ = new Subject<boolean>();
 
@@ -45,13 +45,8 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.filtered = this.form.get('producto').valueChanges.pipe(
-      startWith<string | ProveedorProducto>(''),
-      map(value => (typeof value === 'string' ? value : value.clave)),
-      map(name => (name ? this._filter(name) : this.productos.slice()))
-    );
-
     if (this.compraDet) {
+      // console.log('Editando partida: ', this.compraDet);
       const cve = this.compraDet.clave;
       const producto = this.productos.find(item => item.clave === cve);
       const data = { ...this.compraDet, producto };
@@ -62,18 +57,6 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.complete();
-  }
-
-  displayFn(prod?: ProveedorProducto): string | undefined {
-    return prod ? prod.clave : undefined;
-  }
-
-  private _filter(value: string): ProveedorProducto[] {
-    const filterValue = value.toLowerCase();
-
-    return this.productos.filter(option =>
-      option.clave.toLowerCase().includes(filterValue)
-    );
   }
 
   private buildForm() {
@@ -107,7 +90,7 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     );
     const importe$ = combineLatest(solicitado$, precio$).pipe(
-      map(ar => ar[0] * ar[1]),
+      map(res => this.calcularImporte(res[0], res[1], this.factor)),
       takeUntil(this.destroy$)
     );
 
@@ -115,8 +98,17 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
   }
 
   private registerProducto(p: ProveedorProducto) {
-    console.log('ProveedorProducto: ', p);
     this.form.get('precio').setValue(p.costoUnitario);
+  }
+
+  private calcularImporte(
+    cantidad: number,
+    precio: number,
+    factor: number
+  ): number {
+    const imp = (cantidad / factor) * precio;
+    console.log('Calculando importe: ', imp);
+    return round(imp, 2);
   }
 
   submit() {
@@ -134,5 +126,17 @@ export class CompradetDialogComponent implements OnInit, OnDestroy {
 
   get title() {
     return 'Agregar producto ';
+  }
+
+  get producto() {
+    return this.form.get('producto').value;
+  }
+
+  get factor() {
+    if (this.producto) {
+      return this.producto.factor;
+    } else {
+      return 1.0;
+    }
   }
 }

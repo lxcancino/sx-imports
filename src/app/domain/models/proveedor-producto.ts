@@ -5,4 +5,6 @@ export interface ProveedorProducto {
   codigo?: string;
   gramos: number;
   costoUnitario: number;
+  factor?: number;
+  unidad?: string;
 }

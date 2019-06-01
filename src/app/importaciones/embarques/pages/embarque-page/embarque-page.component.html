@@ -1,0 +1,22 @@
+<mat-card *ngIf="embarque$ | async as embarque">
+  <div class="mat-title" layout>
+    <span>Embarque: </span>
+    <span class="pad-right">{{ embarque.nombre }}</span>
+    <span flex></span>
+    <span>{{ embarque.folio }}</span>
+  </div>
+
+  <mat-card-header>
+    <mat-card-title> </mat-card-title>
+    <mat-card-subtitle>
+      <div layout>
+        <span flex>Proveedor: {{ embarque.proveedor.nombre }}</span>
+        <span flex class="pad-right">Aduana: {{ embarque.aduanaNombre }}</span>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    {{ embarque | json }}
+  </mat-card-content>
+</mat-card>

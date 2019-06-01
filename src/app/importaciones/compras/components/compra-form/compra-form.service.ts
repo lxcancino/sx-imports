@@ -33,7 +33,6 @@ export class CompraFormService {
     });
   }
 
-
   editarPartida(productos: ProveedorProducto[], compraDet: Partial<CompraDet>) {
     return this.dialog.open(CompradetDialogComponent, {
       data: {
@@ -42,6 +41,17 @@ export class CompraFormService {
       },
       width: '650px'
     });
+  }
+
+  eliminarPartida(det: CompraDet): Observable<any> {
+    return this.dialogService
+      .openConfirm({
+        title: 'Eliminar partida',
+        message: 'Producto: ' + det.clave,
+        acceptButton: 'ELIMINAR',
+        cancelButton: 'CANCELAR'
+      })
+      .afterClosed();
   }
 
   registerForm(form: FormGroup) {

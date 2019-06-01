@@ -7,6 +7,16 @@
   <mat-divider></mat-divider>
   <sxi-embarques-table
     [embarques]="embarques$ | async"
+    (select)="onSelect($event)"
     #grid
   ></sxi-embarques-table>
+  <a
+    mat-fab
+    matTooltip="Alta de embarque"
+    color="accent"
+    class="mat-fab-position-bottom-right z-3"
+    (click)="createEmbarque()"
+  >
+    <mat-icon>add</mat-icon>
+  </a>
 </mat-card>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
+
 import * as fromRoot from '@app/store';
 import * as fromActions from '../actions/embarque.actions';
 import { EmbarqueActionTypes } from '../actions/embarque.actions';
@@ -22,6 +23,27 @@ export class EmbarqueEffects {
         )
       )
     )
+  );
+
+  @Effect() createEmbarque$ = this.actions$.pipe(
+    ofType<fromActions.CreateEmbarque>(EmbarqueActionTypes.CreateEmbarque),
+    map(action => action.payload.embarque),
+    switchMap(emb =>
+      this.service.save(emb).pipe(
+        map(embarque => new fromActions.CreateEmbarqueSuccess({ embarque })),
+        catchError(response =>
+          of(new fromActions.CreateEmbarqueFail({ response }))
+        )
+      )
+    )
+  );
+
+  @Effect({ dispatch: false }) createSuccess$ = this.actions$.pipe(
+    ofType<fromActions.CreateEmbarqueSuccess>(
+      EmbarqueActionTypes.CreateEmbarqueSuccess
+    ),
+    map(action => action.payload.embarque),
+    tap(e => console.log('Embarque generado: ', e))
   );
 
   @Effect() tenant$ = this.actions$.pipe(

@@ -37,7 +37,9 @@ export class ProveedorProductoFieldComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   displayFn(provProd: ProveedorProducto) {
-    return provProd ? `${provProd.clave} - ${provProd.descripcion}` : '';
+    return provProd
+      ? `${provProd.clave} - ${provProd.descripcion} (${provProd.unidad})`
+      : '';
   }
 
   private _filter(value: string): ProveedorProducto[] {

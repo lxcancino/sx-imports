@@ -1,0 +1,60 @@
+<form [formGroup]="form">
+  <h2 mat-dialog-title>
+    Alta de Embarque
+  </h2>
+  <mat-dialog-content>
+    <div layout>
+      <sxi-upper-case-field
+        formControlName="bl"
+        placeholder="BL"
+      ></sxi-upper-case-field>
+      <sxi-upper-case-field
+        formControlName="nombre"
+        flex
+        class="pad-left"
+      ></sxi-upper-case-field>
+    </div>
+    <div layout>
+      <sxi-proveedor-field
+        formControlName="proveedor"
+        placeholder="Nombre"
+        flex
+      ></sxi-proveedor-field>
+    </div>
+    <sxi-aduana-field [parent]="form"></sxi-aduana-field>
+    <sxi-fecha-field [parent]="form" property="fecha" class="pad-right">
+    </sxi-fecha-field>
+    <div layout>
+      <sxi-fecha-field
+        [parent]="form"
+        property="ingresoAduana"
+        placeholder="ETA"
+        flex
+      >
+      </sxi-fecha-field>
+      <mat-form-field class="pad-left" flex>
+        <input
+          matInput
+          formControlName="contenedores"
+          type="number"
+          placeholder="Contenedores"
+        />
+      </mat-form-field>
+    </div>
+    <sxi-upper-case-field
+      formControlName="comentario"
+      placeholder="Comentario"
+    ></sxi-upper-case-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Canelar</button>
+    <button
+      mat-button
+      [disabled]="form.invalid"
+      (click)="submit()"
+      type="button"
+    >
+      Aceptar
+    </button>
+  </mat-dialog-actions>
+</form>

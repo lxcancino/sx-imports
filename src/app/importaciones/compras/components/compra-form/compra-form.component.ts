@@ -19,7 +19,7 @@ import {
 } from '@angular/forms';
 
 import { Subject } from 'rxjs';
-import { distinctUntilChanged, takeUntil, filter } from 'rxjs/operators';
+import { distinctUntilChanged, takeUntil, filter, tap } from 'rxjs/operators';
 
 import { Compra, CompraDet } from '@app/domain/models/compras';
 import { CompraFormService } from './compra-form.service';
@@ -73,6 +73,8 @@ export class CompraFormComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject<boolean>();
 
+  readOnly = false;
+
   constructor(
     private fb: FormBuilder,
     private service: CompraFormService,
@@ -83,10 +85,7 @@ export class CompraFormComponent implements OnInit, OnDestroy {
     this.service.registerForm(this.form);
   }
 
-  ngOnInit() {
-    if (this.compra) {
-    }
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.destroy$.next(true);
@@ -98,6 +97,7 @@ export class CompraFormComponent implements OnInit, OnDestroy {
       proveedor: [null, [Validators.required]],
       fecha: [new Date(), [Validators.required]],
       entrega: [null, [Validators.required]],
+      depuracion: [null],
       moneda: ['MXN', [Validators.required]],
       tipoDeCambio: [1.0, [Validators.required]],
       comentario: [null],
@@ -108,15 +108,20 @@ export class CompraFormComponent implements OnInit, OnDestroy {
   private eventBus() {
     this.form
       .get('proveedor')
-      .valueChanges.pipe(distinctUntilChanged())
-      .pipe(
-        // filter(p => !p.productos),
+      .valueChanges.pipe(
+        distinctUntilChanged((curr, prev) => {
+          if (!curr || !prev) {
+            return false;
+          }
+          return curr.clave === prev.clave;
+        }),
+        tap(value => console.log('Proveedor changed: ', value)),
         takeUntil(this.destroy$)
       )
       .subscribe(p => this.proveedorChange.emit(p));
 
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(v => {
-      // console.log('Errors: ', this.form.value);
+      // console.log('Value changed: ', this.form.value);
     });
   }
 
@@ -156,13 +161,16 @@ export class CompraFormComponent implements OnInit, OnDestroy {
   set compra(c: Compra) {
     this._compra = c;
     if (c) {
-      console.log('Editando compra: ', c);
+      // console.log('Editando compra: ', c);
+      this.form.patchValue(c);
       this.cleanPartidas();
-      this.form.patchValue(c, { emitEvent: false });
       c.partidas.forEach(item => {
         this.partidas.push(new FormControl(item));
       });
       this.productos = c.proveedor.productos as ProveedorProducto[];
+      if (this.compra.depuracion) {
+        this.form.disable();
+      }
     }
   }
 
@@ -192,7 +200,11 @@ export class CompraFormComponent implements OnInit, OnDestroy {
   }
 
   isDisabled() {
-    return this.form.invalid || this.form.pristine;
+    return this.form.invalid || this.form.pristine || this.form.disabled;
+  }
+
+  isReadOnly() {
+    return this.compra ? this.compra.depuracion : false;
   }
 
   onEdit(index: number) {
@@ -202,11 +214,24 @@ export class CompraFormComponent implements OnInit, OnDestroy {
       .afterClosed()
       .subscribe(res => {
         if (res) {
+          console.log('Editada: ', res);
           this.partidas.setControl(index, new FormControl(res));
           this.partidasTable.refresh();
           this.form.markAsDirty();
           this.cd.detectChanges();
         }
       });
+  }
+
+  onDelete(index: number) {
+    const ctrl = this.partidas.at(index);
+    this.service.eliminarPartida(ctrl.value).subscribe(res => {
+      if (res) {
+        this.partidas.removeAt(index);
+        this.partidasTable.refresh();
+        this.cd.detectChanges();
+        this.form.markAsDirty();
+      }
+    });
   }
 }

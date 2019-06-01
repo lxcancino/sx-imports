@@ -9,6 +9,7 @@ import { components, entryComponents } from './components';
 
 @NgModule({
   declarations: [...components, ...entryComponents, ...pages],
+  entryComponents: [...entryComponents],
   imports: [SharedModule, EmbarquesRoutingModule]
 })
 export class EmbarquesModule {}

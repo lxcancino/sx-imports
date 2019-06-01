@@ -14,16 +14,15 @@
       property="entrega"
       placeholder="F.Entrega"
     ></sxi-fecha-field>
-    <mat-form-field>
-      <input
-        matInput
-        disabled="true"
-        value="{{ compra?.depuracion | date: 'dd/MMM/yyyy' }}"
-        placeholder="Depuración"
-        [value]="compra"
-        class="text-center"
-      />
-    </mat-form-field>
+
+    <sxi-fecha-field
+      class="pad-left fecha-field"
+      [parent]="form"
+      [min]="form.value.entrega"
+      property="depuracion"
+      placeholder="Depuración"
+    >
+    </sxi-fecha-field>
   </div>
   <div layout>
     <sxi-tc-field [parent]="form"></sxi-tc-field>
@@ -40,6 +39,8 @@
       [parent]="form"
       [partidas]="partidas.value"
       (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+      [readOnly]="isReadOnly()"
     ></sxi-compra-partidas>
   </div>
 </form>

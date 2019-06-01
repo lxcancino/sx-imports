@@ -14,6 +14,8 @@ import { MatTable, MatTableDataSource, MatSort } from '@angular/material';
 
 import { CompraDet } from '@app/domain/models/compras';
 
+import { sumBy } from 'lodash/math';
+
 @Component({
   selector: 'sxi-compra-partidas',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,7 +46,15 @@ export class CompraPartidasComponent implements OnInit, OnChanges {
 
   dataSource = new MatTableDataSource<CompraDet>([]);
 
-  displayColumns = ['index', 'clave', 'descripcion', 'solicitado', 'precio', 'importe', 'operaciones'];
+  displayColumns = [
+    'index',
+    'clave',
+    'descripcion',
+    'solicitado',
+    'precio',
+    'importe',
+    'operaciones'
+  ];
 
   @ViewChild('table')
   table: MatTable<CompraDet>;
@@ -61,5 +71,9 @@ export class CompraPartidasComponent implements OnInit, OnChanges {
 
   refresh() {
     this.table.renderRows();
+  }
+
+  get subtotal() {
+    return sumBy(this.dataSource.filteredData, 'importe');
   }
 }

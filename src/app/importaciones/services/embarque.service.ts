@@ -8,6 +8,7 @@ import { ConfigService } from '@app/core/services/config.service';
 
 import { Embarque } from '@app/domain/models/embarques';
 import { Update } from '@ngrx/entity';
+import { Periodo } from '@app/core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,15 @@ export class EmbarqueService {
     this.apiUrl = config.buildApiUrl('embarques');
   }
 
-  list(): Observable<Embarque[]> {
+  list(periodo?: Periodo): Observable<Embarque[]> {
+    let params = new HttpParams().set('sort', 'folio').set('order', 'desc');
+    if (periodo) {
+      params = params
+        .set('fechaInicial', periodo.fechaInicial.toISOString())
+        .set('fechaFinal', periodo.fechaFinal.toISOString());
+    }
     return this.http
-      .get<Embarque[]>(this.apiUrl)
+      .get<Embarque[]>(this.apiUrl, { params })
       .pipe(catchError(error => throwError(error)));
   }
 

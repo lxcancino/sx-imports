@@ -17,12 +17,14 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(state = initialState, action: EmbarqueActions): State {
   switch (action.type) {
+    case EmbarqueActionTypes.CreateEmbarque:
     case EmbarqueActionTypes.LoadEmbarques: {
       return {
         ...state,
         loading: true
       };
     }
+    case EmbarqueActionTypes.CreateEmbarqueFail:
     case EmbarqueActionTypes.LoadEmbarquesFail: {
       return {
         ...state,
@@ -36,6 +38,20 @@ export function reducer(state = initialState, action: EmbarqueActions): State {
         loading: false
       });
     }
+    case EmbarqueActionTypes.CreateEmbarqueSuccess: {
+      const embarque = action.payload.embarque;
+      return adapter.addOne(embarque, {
+        ...state,
+        loading: false
+      });
+    }
+
+    case EmbarqueActionTypes.UpsertEmbarque: {
+      const embarque = action.payload.embarque;
+      console.log('Upsert: ', embarque);
+      return adapter.upsertOne(embarque, state);
+    }
+
     default:
       return { ...state };
   }
