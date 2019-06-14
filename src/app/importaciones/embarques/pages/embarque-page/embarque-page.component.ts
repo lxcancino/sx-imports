@@ -6,7 +6,7 @@ import * as fromStore from '../../../store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Embarque } from '@app/domain/models/embarques';
+import { Embarque, EmbarqueDet } from '@app/domain/models/embarques';
 
 @Component({
   selector: 'sxi-page-create',
@@ -21,5 +21,11 @@ export class EmbarquePageComponent implements OnInit {
 
   ngOnInit() {
     this.embarque$ = this.store.pipe(select(fromStore.getSelectedEmbarque));
+  }
+  onEdit(event: EmbarqueDet) {
+    console.log('Drill: ', event);
+  }
+  onFactura(event: EmbarqueDet) {
+    console.log('Find Factura: ', event);
   }
 }

@@ -1,0 +1,90 @@
+<div class="table-panel">
+  <table mat-table [dataSource]="dataSource" matSort #table>
+    <ng-container matColumnDef="clave">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Producto</th>
+      <td mat-cell *matCellDef="let row">{{ row.clave }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+      <td mat-cell *matCellDef="let row">{{ row.descripcion }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="compra">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Compra</th>
+      <td mat-cell *matCellDef="let row">{{ row.compra }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <td mat-cell *matCellDef="let row">{{ row.cantidad }}</td>
+      <td mat-footer-cell *matFooterCellDef>
+        {{ sumBy('cantidad') }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="kilosNetos">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Kg Net</th>
+      <td mat-cell *matCellDef="let row">{{ row.kilosNetos }}</td>
+      <td mat-footer-cell *matFooterCellDef>
+        {{ sumBy('kilosNetos') }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="kilosEstimados">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Kg Est</th>
+      <td mat-cell *matCellDef="let row">{{ row.kilosEstimados }}</td>
+      <td mat-footer-cell *matFooterCellDef>
+        {{ sumBy('kilosEstimados') }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="precio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+      <td mat-cell *matCellDef="let row">{{ row.precio | currency }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="importe">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Importe</th>
+      <td mat-cell *matCellDef="let row">{{ row.importe | currency }}</td>
+      <td mat-footer-cell *matFooterCellDef>
+        {{ sumBy('importe') | currency }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="factura">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Factura</th>
+      <td mat-cell *matCellDef="let row">
+        <a [routerLink]="['/cxp/facturasDeImportacion/', row.id]">{{
+          row.factura
+        }}</a>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="contenedor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contenedor</th>
+      <td mat-cell *matCellDef="let row">{{ row.contenedor }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="tarimas">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tarimas</th>
+      <td mat-cell *matCellDef="let row">{{ row.tarimas }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayColumns"
+      (click)="edit.emit(row)"
+      class="pasive cursor-pointer"
+    ></tr>
+    <tr mat-footer-row *matFooterRowDef="displayColumns; sticky: true"></tr>
+  </table>
+</div>

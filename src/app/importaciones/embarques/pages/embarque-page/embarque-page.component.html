@@ -1,22 +1,41 @@
 <mat-card *ngIf="embarque$ | async as embarque">
-  <div class="mat-title" layout>
-    <span>Embarque: </span>
-    <span class="pad-right">{{ embarque.nombre }}</span>
-    <span flex></span>
-    <span>{{ embarque.folio }}</span>
-  </div>
-
-  <mat-card-header>
-    <mat-card-title> </mat-card-title>
-    <mat-card-subtitle>
-      <div layout>
-        <span flex>Proveedor: {{ embarque.proveedor.nombre }}</span>
-        <span flex class="pad-right">Aduana: {{ embarque.aduanaNombre }}</span>
-      </div>
-    </mat-card-subtitle>
-  </mat-card-header>
+  <sxi-embarque-header [embarque]="embarque"></sxi-embarque-header>
   <mat-divider></mat-divider>
-  <mat-card-content>
-    {{ embarque | json }}
-  </mat-card-content>
+  <!-- <sxi-embarque-tabs></sxi-embarque-tabs> -->
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="">format_list_bulleted</mat-icon>
+        Lista de empaque
+      </ng-template>
+      <sxi-lista-de-empaque
+        [partidas]="embarque.partidas"
+        (selectFactura)="onFactura($event)"
+        (edit)="onEdit($event)"
+      ></sxi-lista-de-empaque>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="">attach_money</mat-icon>
+        Costo
+      </ng-template>
+      COSTOS
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="">view_module</mat-icon>
+        Contenedores
+      </ng-template>
+      CONTENDORES
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="">edit</mat-icon>
+        Propiedades
+      </ng-template>
+      PROPIEDADEES
+    </mat-tab>
+  </mat-tab-group>
 </mat-card>
